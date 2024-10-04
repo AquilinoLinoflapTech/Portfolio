@@ -63,7 +63,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden text-center absolute bg-[#1c1c1c] w-full left-0 top-16"
+            className="md:hidden text-center absolute bg-[#131313] w-full left-0 top-16"
           >
             <ul className="flex-col space-y-3 p-6">
               <MenuItems onClick={handleLinkClick} />
