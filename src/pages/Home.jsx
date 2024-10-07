@@ -1,77 +1,93 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const Home = () => {
+  const name = "Angelo Aquilino";
+  const paragraphs = [
+    "is a photography enthusiast   ",
+    "is a creative artist         ",
+    "is a talented software engineer",
+  ];
+
+  const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isErasing, setIsErasing] = useState(false);
+
+  useEffect(() => {
+    const typingEffect = () => {
+      const currentParagraph = paragraphs[currentParagraphIndex];
+
+      if (isErasing) {
+        setDisplayedText((prev) => prev.slice(0, prev.length - 1));
+
+        if (displayedText.length === 0) {
+          setIsErasing(false);
+          setTimeout(() => {
+            setCurrentParagraphIndex(
+              (prevIndex) => (prevIndex + 1) % paragraphs.length
+            );
+          }, 1000);
+        }
+      } else {
+        if (displayedText.length < currentParagraph.length) {
+          const newDisplayedText = currentParagraph.slice(
+            0,
+            displayedText.length + 1
+          );
+          setDisplayedText(newDisplayedText);
+        } else {
+          setTimeout(() => {
+            setIsErasing(true);
+          }, 1500);
+        }
+      }
+    };
+
+    const typingInterval = setInterval(typingEffect, isErasing ? 100 : 150);
+
+    return () => clearInterval(typingInterval);
+  }, [displayedText, currentParagraphIndex, isErasing, paragraphs]);
+
   return (
     <>
-      <section className="bg-[#171717] text-[#f5f5dc] h-screen flex flex-col justify-center items-center text-center">
-        <motion.h1
-          className="text-8xl font-black"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
-        >
-          Capturing Creativity in Code
-        </motion.h1>
-
-        <motion.p
-          className="text-2xl mt-6"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          Where photography, art, and code converge.
-        </motion.p>
-      </section>
-      
-      <section className="bg-[#171717] text-[#f5f5dc] flex justify-center items-center pt-20 pb-20">
-        <div className="space-y-4 text-lg text-justify max-w-7xl tracking-tight leading-loose">
-          <motion.div 
-            className="bg-[#2a2a2a] p-6 rounded-lg shadow-lg"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+      {/* Hero Section */}
+      <section className="bg-[#171717] text-[#f5f5dc] h-[90vh] md:h-screen flex flex-col md:justify-center items-start text-left p-6">
+        <div className="mt-12 md:mt-0 flex flex-col">
+          <motion.h1
+            className="text-6xl font-bold text-[#c0a080] md:text-8xl"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5 }}
           >
-            <p>
-              Photography is more than just a hobby; it’s a profound passion that
-              fuels my creativity. Through the lens of my camera, I capture
-              moments that speak volumes, conveying emotions and stories that
-              words often fail to express. Art has always been my outlet for
-              channeling feelings, and I take immense joy in crafting visual
-              narratives that resonate with others.
-            </p>
-          </motion.div>
+            Capturing Creativity in Code
+          </motion.h1>
 
-          <motion.div 
-            className="bg-[#2a2a2a] p-6 rounded-lg shadow-lg"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+          <motion.p
+            className="text-lg md:text-2xl font-medium mt-2 leading-relaxed"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.5 }}
           >
-            <p>
-              Simultaneously, I’ve discovered a powerful new medium for expression
-              through coding. This unique blend of logic and artistry allows me to
-              build dynamic digital experiences that come to life in the same way
-              my photographs do. Each project reflects my commitment to creativity
-              and innovation.
-            </p>
-          </motion.div>
+            Where <span className="text-[#c0a080]">photography</span>,{" "}
+            <span className="text-[#c0a080]">art</span>, and{" "}
+            <span className="text-[#c0a080]">code</span> converge.
+          </motion.p>
 
-          <motion.div 
-            className="bg-[#2a2a2a] p-6 rounded-lg shadow-lg"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+          <motion.h1
+            className="text-lg font-bold mt-12 md:text-2xl"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 2 }}
           >
-            <p>
-              This portfolio is a celebration of my artistic journey—a collection
-              of the images I’ve captured and the code I’ve written. It embodies
-              my belief that creativity knows no boundaries, transcending the
-              traditional and the digital alike.
-            </p>
-          </motion.div>
+            {name}{" "}
+            <span className="text-lg text-[#c0a080] md:text-2xl">{displayedText}</span>
+            <span className="animate-pulse">|</span>
+          </motion.h1>
         </div>
       </section>
+
+      <div className="h-1 bg-[#c0a080] w-24 mx-auto  rounded-full"></div>
+
     </>
   );
 };
