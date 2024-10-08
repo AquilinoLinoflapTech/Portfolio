@@ -51,7 +51,7 @@ const Home = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-[#171717] text-[#f5f5dc] h-[90vh] md:h-screen flex flex-col md:justify-center items-start text-left p-6">
+      {/* <section className="bg-[#171717] text-[#f5f5dc] h-[90vh] md:h-screen flex flex-col md:justify-center items-start text-left p-6">
         <div className="mt-12 md:mt-0 flex flex-col">
           <motion.h1
             className="text-6xl font-bold text-[#c0a080] md:text-8xl"
@@ -86,7 +86,7 @@ const Home = () => {
         </div>
       </section>
 
-      <div className="h-1 bg-[#c0a080] w-24 mx-auto  rounded-full"></div>
+      <div className="h-1 bg-[#c0a080] w-24 mx-auto  rounded-full"></div> */}
 
     </>
   );
