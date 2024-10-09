@@ -2,9 +2,8 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#171717] w-full p-6 text-[#f5f5dc] flex flex-col md:flex-row justify-between items-center">
+    <footer className="bg-[#141414] w-full p-6 text-[#bac4b8] flex flex-col md:flex-row justify-between items-center">
       <div className="mb-4 md:mb-0 flex flex-col">
-        <p className="font-bold text-xl text-center md:text-left">Socials</p>
         <ul className="flex space-x-4 mt-2">
           <li>
             <a
